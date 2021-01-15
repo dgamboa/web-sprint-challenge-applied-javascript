@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const Card = (article) => {
+const Card = (article, topic) => {
   // TASK 5
   // ---------------------
   // Implement this function, which should return the markup you see below.
@@ -40,6 +40,8 @@ const Card = (article) => {
   divAuthor.append(divImg, span);
   divCard.append(divHeadline, divAuthor);
 
+  divCard.dataset.topic = topic;
+
   divCard.addEventListener('click', () => console.log(divHeadline.textContent));
 
   return divCard;
@@ -63,7 +65,7 @@ const cardAppender = (selector) => {
       
       for (const topic in articles) {
         const topicArticles = articles[topic];
-        const articleElements = topicArticles.map(article => Card(article));
+        const articleElements = topicArticles.map(article => Card(article, topic));
         articleElements.map(element => cardsContainer.append(element));
       }
     })

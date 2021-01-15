@@ -50,6 +50,22 @@ const tabsAppender = (selector) => {
       const tabs = Tabs(topics);
       const tabsContainer = document.querySelector(selector);
       tabsContainer.appendChild(tabs);
+
+      function helper(event) {
+        const cards = [...document.querySelectorAll('.card')];
+        cards.map(card => {
+          if (card.dataset.topic != event.target.textContent.split('.')[0]) {
+            card.style.display = "none";
+          } else {
+            card.style.display = null;
+          }
+        })
+      }
+
+      const tabElements = [...document.querySelectorAll('.tab')];
+      tabElements.map(tab => {
+        tab.addEventListener('click', helper);
+      });
     })
     .catch(err => {
       console.log(err);
